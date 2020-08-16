@@ -47,7 +47,8 @@ var defaultState = function (){
 
 var startGame = function(){
     defaultState();
-    console.log("default state works");
+    document.querySelector(".game-controls").style.display = "block";
+    document.querySelector("h1").style.display = "none";
     //starts the game timer function
     startTimer(gameTime);
     console.log("timer works");
@@ -294,3 +295,6 @@ var gameOverCheck = function(){
         outOfTime();
     }
 }
+
+/********************** Animation ********************************
+*/

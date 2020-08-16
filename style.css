@@ -1,5 +1,72 @@
-h1, h2, h3{
+@font-face {
+	font-family: pixelFontBold;
+	src: url("fonts/slkscrb.ttf");
+}
+
+@font-face {
+	font-family: pixelFontReg;
+	src: url("fonts/slkscr.ttf");
+}
+
+body{
+	background-image: url("images/cave-wallpaper-3.jpg");
+}
+
+h1 {
+	font-family: pixelFontBold;
 	text-align: center;
+	color: white;
+	font-size: 60px;
+}
+
+#start-cue {
+	font-size: 30px;
+}
+
+h2, h3 {
+	font-family: pixelFontReg;
+	text-align: center;
+	color: white;
+}
+
+button{
+	font-family: pixelFontReg;
+}
+
+.game-controls{
+	margin: 0 auto;
+	padding: 0;
+	display: none;
+}
+
+.game-controls h3 {
+	font-size: 20px;
+}
+
+
+.game-controls img {
+	position: relative;
+	top: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 5%;
+}
+
+.monster-image img {
+	width: 150px;
+	height: 150px;
+	display: none;
+}
+
+#gameOverHeader {
+	font-family: pixelFontReg;
+	color: black;
+	font-size: 40px;
+}
+
+#gameOver-txt {
+	font-family: pixelFontReg;
+	font-size: 25px;
 }
 
 .start-button {
@@ -23,8 +90,8 @@ h1, h2, h3{
 	left: 50%;
 	transform: translate(-50%, -50%) scale(0);
 	background: #fff;
-	width: 450px;
-	height: 220px;
+	width: 500px;
+	height: 280px;
 	z-index: 2;
 	text-align: center;
 	padding: 20px;
