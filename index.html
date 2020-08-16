@@ -9,15 +9,16 @@
     <h1>Dungeon Slayer</h1>
 
     <div class="push-start">
-        <h2 id="start-cue">Push "start" to begin!</h2>
+        <h2 id="start-cue">Push "Start" to begin!</h2>
     </div>
 
     <div class="start-button">
            <button id="start">Start</button>
     </div>
 
-
-    <h2 id=timer></h2>
+    <div id="timer">
+        <h2></h2>
+    </div>
 
     <div class="playerStats">
 
@@ -25,7 +26,7 @@
 
 
     <div class="game-controls">
-        <h3>Press "a" for Physical Attack, "s" for Magical Attack, or "d" for Sneak Attack!</h3>
+        <h3>Press "A" for Physical Attack, "S" for Magical Attack, or "D" for Sneak Attack!</h3>
     </div>
 
     <div class="results"></div>
@@ -33,9 +34,12 @@
     <div class="popup" id="gameOver">
         <div class="overlay"></div>
         <div class="content">
-            <div class="close-btn"></div>
-            <h1 class="gameOverHeader"></h1>
-            <p class="gameOver-txt"></p>
+            <div class="close-btn">&times;</div>
+            <h1 id="gameOverHeader"></h1>
+            <p id="gameOver-txt"></p>
+            <div class="playAgain">
+                <button id="replay">Play again.</button>
+            </div>
         </div>
 
     </div>

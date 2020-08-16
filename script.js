@@ -8,13 +8,23 @@
  timer is started and displayed. Live counter is displayed. gameOver checking function is activated.
 */
 
+/******************************* Global variables ******************************
+*/
 
+// DOM Manipulation
 var startInstructions = document.getElementById("start-cue");
 var timer = document.getElementById("timer");
 var startButton = document.querySelector("#start");
 var showLives = document.createElement("h2");
 var showScore = document.createElement("h2");
-var gameTime = 0;
+var playerStats = document.querySelector(".playerStats");
+var showTimer = document.createElement("h2");
+var gameOverHeader = document.getElementById("gameOverHeader");
+var gameOverTxt = document.getElementById("gameOver-txt");
+
+
+// Game Variables
+var gameTime = 60;
 var gameState = null;
 var playerLives = 3;
 var playerChoice = null;
@@ -24,51 +34,66 @@ var playerAttack = "";
 var monsterAttack = "";
 
 
-var startGame = function(){
-    //starts the game timer function
+// Interval ID for checking of gameOver status
+var checkStatus = null;
+var timeInterval = null;
+
+var defaultState = function (){
     gameTime = 60;
     playerLives = 3;
     score = 0;
+    console.log("this worked");
+}
+
+var startGame = function(){
+    defaultState();
+    console.log("default state works");
+    //starts the game timer function
     startTimer(gameTime);
+    console.log("timer works");
     //changes the game state to active
     gameState = "active";
     //removes start button and instructions
-    document.querySelector(".start-button").removeChild(startButton);
-    document.querySelector(".push-start").removeChild(startInstructions);
+    document.getElementById("start").style.display = "none";
+    document.getElementById("start-cue").style.display = "none";
+    console.log("removal of start button and instructions worked");
     //displays player lives and score
     displayPlayerStats();
+    console.log('stats displayed');
+    gameOverCheck();
+    checkStatus = setInterval(gameOverCheck, 200);
+    console.log("game over check activated");
 }
 
 // Function to display player status
 var displayPlayerStats = function () {
     showLives.innerHTML = "Lives: " + playerLives;
     showScore.innerHTML = "Score: " + score;
-    document.querySelector(".playerStats").appendChild(showLives);
-    document.querySelector(".playerStats").appendChild(showScore);
+    playerStats.appendChild(showLives);
+    playerStats.appendChild(showScore);
 }
-
 
 // Event listener to start the game.
 startButton.addEventListener('click', startGame);
 
 // function to display time remaining;
 var startTimer = function(timeLeft) {
-    setInterval(function() {
+    timer.appendChild(showTimer);
+    timeInterval = setInterval(function() {
         if (timeLeft <= 0) {
-            gameTime = 0;
             clearInterval(startTimer);
-            gameState = "inactive";
-            timer.innerHTML = "Time's up!"
+            gameTime = 0;
+            showTimer.innerHTML = "Time's up!"
         } else {
-            timer.innerHTML = timeLeft + " seconds";
+            showTimer.innerHTML = timeLeft + " seconds";
         }
-        timeLeft--;
+        timeLeft -= 1;
+        console.log(timeLeft);
     }, 1000);
 }
 
 
 /************************ Player Selection ************************************
-
 Player can choose 1 of 3 different attacks by pushing the respective buttons:
     "a" for physical attack => converted to 0
     "s" for magical attack => converted to 1
@@ -113,7 +138,6 @@ var handleControls = function() {
 }
 
 // Event Listener to listen for buttons being pressed
-
 document.addEventListener("keydown", handleControls);
 
 
@@ -157,7 +181,7 @@ var resultsHandler = function() {
     results.appendChild(displayResults);
     setTimeout(function (){
         results.removeChild(displayResults);
-    }, 2000);
+    }, 1500);
 }
 
 // this function triggers in the event of a draw
@@ -229,15 +253,44 @@ var compareChoices = function() {
                     player score disappears.
 */
 
-// var gameStatus = function() {
-//     if (playerLives === 0) {
-//         clearInterval(startTimer);
-
-//     }
-// }
-
 //Code the pop-up for Game Over Message
 
-// var gameOver = function(){
+var refreshPage = function (){
+    window.location.reload();
+}
 
-// }
+var replay = function() {
+    document.getElementById("gameOver").classList.toggle("active");
+    startGame();
+}
+
+var endGame = function (){
+    clearInterval(checkStatus);
+    clearInterval(timeInterval);
+    gameState = "inactive";
+    document.getElementById("gameOver").classList.toggle("active");
+    document.querySelector(".close-btn").addEventListener('click', refreshPage);
+    document.getElementById("replay").addEventListener('click', replay);
+}
+
+var outOfLives = function(){
+    endGame();
+    gameOverHeader.innerText = "You are out of lives."
+    gameOverTxt.innerText = "Your score: " + score;
+
+}
+
+var outOfTime = function(){
+    endGame();
+    gameOverHeader.innerText = "You are out of time!"
+    gameOverTxt.innerText = "Your score: " + score;
+}
+
+var gameOverCheck = function(){
+    console.log("checking status");
+    if (playerLives === 0) {
+        outOfLives();
+    } else if (gameTime === 0) {
+        outOfTime();
+    }
+}
