@@ -22,7 +22,6 @@ var showTimer = document.createElement("h2");
 var gameOverHeader = document.getElementById("gameOverHeader");
 var gameOverTxt = document.getElementById("gameOver-txt");
 
-
 // Game Variables
 var gameTime = 60;
 var gameState = null;
@@ -47,8 +46,11 @@ var defaultState = function (){
 
 var startGame = function(){
     defaultState();
+    randomiseMonster();
     document.querySelector(".game-controls").style.display = "block";
     document.querySelector("h1").style.display = "none";
+    document.querySelector(".arena").style.display = "flex";
+    // document.getElementById("hero").style.display = "inline-block";
     //starts the game timer function
     startTimer(gameTime);
     console.log("timer works");
@@ -194,6 +196,7 @@ var drawHandler = function() {
 // //Player wins function. Score goes up by 1. Monster image changes
 var winHandler = function () {
     displayResults.innerText = "You used " + playerAttack + " and the monster used " + monsterAttack + ". The monster is vanquished!"
+    randomiseMonster();
     score += 1;
     resultsHandler();
 }
@@ -298,3 +301,33 @@ var gameOverCheck = function(){
 
 /********************** Animation ********************************
 */
+
+var monsterImage = document.getElementById("monster");
+
+//monster 0
+var monster1 = {
+    src: "images/monster-1.gif"
+}
+
+// monster 1
+var monster2 = {
+    src: "images/monster-2.gif"
+}
+
+// monster 2
+var monster3 = {
+    src: "images/monster-3.gif"
+}
+
+//monster 3
+var monster4 = {
+    src: "images/monster-4.gif"
+}
+
+var monsterCollection = [monster1, monster2, monster3, monster4];
+
+var randomiseMonster = function() {
+    monsterChoice = Math.floor(Math.random() * 4);
+    monsterImage.src = monsterCollection[monsterChoice].src;
+    document.querySelector('.monster-image').appendChild(monsterImage);
+}
