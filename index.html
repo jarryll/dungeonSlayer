@@ -6,15 +6,15 @@
 </head>
 <body>
 
-    <audio controls autoplay loop>
+<!--     <audio controls autoplay loop>
         <source src="music/adventure.mp3">
-    </audio>
+    </audio> -->
 
-    <h1>Dungeon Slayer</h1>
+    <h1 id="name">Dungeon Slayer</h1>
 
     <div class = "start-container">
         <div class="push-start">
-            <h2 id="start-cue">Push "Start" to begin!</h2>
+            <h2 id="start-cue" class="blinking">Push "Start" to begin!</h2>
         </div>
 
         <div class="start-button">
@@ -22,13 +22,22 @@
         </div>
     </div>
 
+    <div class="game-instructions">
+        <h3>Welcome, brave adventurer!</h3>
+        <p>Kill as many monsters as you can in 60 seconds, but beware of their attacks. <br><br> In this game:</p>
+        <ul>
+            <li>Physical Attacks win against Sneak Attacks</li>
+            <li>Magical Attacks win against Physical Attacks</li>
+            <li>Sneak Attacks win against Magical Attacks</li>
+        </ul>
+    </div>
+
+
     <div id="timer">
         <h2></h2>
     </div>
 
-    <div class="playerStats">
-
-    </div>
+    <div class="playerStats"></div>
 
     <div class="game-controls">
             <h3>Press "A" for Physical Attack <img src="images/Physical.png" id="physical-icon"> , "S" for Magical Attack <img src="images/Magical.png" id="magical-icon"></h3>
@@ -44,12 +53,9 @@
             <img src="images/hero.gif" id="hero">
         </div>
 
-    <div class="monster-image">
-        <div>
+        <div class="monster-image">
             <img src="" id="monster">
         </div>
-
-    </div>
 
     </div>
 

@@ -25,7 +25,7 @@ var gameOverTxt = document.getElementById("gameOver-txt");
 // Game Variables
 var gameTime = 60;
 var gameState = null;
-var playerLives = 3;
+var playerLives = 5;
 var playerChoice = null;
 var computerChoice = null;
 var score = 0;
@@ -39,33 +39,31 @@ var timeInterval = null;
 
 var defaultState = function (){
     gameTime = 60;
-    playerLives = 3;
+    playerLives = 5;
     score = 0;
-    console.log("this worked");
 }
 
 var startGame = function(){
+    // Reset Game States
     defaultState();
     randomiseMonster();
+    // displays Game Controls and arena and hides title
     document.querySelector(".game-controls").style.display = "block";
     document.querySelector("h1").style.display = "none";
     document.querySelector(".arena").style.display = "flex";
-    // document.getElementById("hero").style.display = "inline-block";
+    document.querySelector(".game-instructions").style.display = "none";
     //starts the game timer function
     startTimer(gameTime);
-    console.log("timer works");
     //changes the game state to active
     gameState = "active";
-    //removes start button and instructions
+    //Hides start button and "push start" instructions
     document.getElementById("start").style.display = "none";
     document.getElementById("start-cue").style.display = "none";
-    console.log("removal of start button and instructions worked");
     //displays player lives and score
     displayPlayerStats();
-    console.log('stats displayed');
+    //Initiates a helper function to constantly check for Game Over conditions
     gameOverCheck();
     checkStatus = setInterval(gameOverCheck, 200);
-    console.log("game over check activated");
 }
 
 // Function to display player status
@@ -197,7 +195,7 @@ var drawHandler = function() {
 var winHandler = function () {
     displayResults.innerText = "You used " + playerAttack + " and the monster used " + monsterAttack + ". The monster is vanquished!"
     randomiseMonster();
-    score += 1;
+    score += 10;
     resultsHandler();
 }
 
