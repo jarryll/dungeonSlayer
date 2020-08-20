@@ -189,8 +189,8 @@ button{
 
 @keyframes blinkingText{
     0%{     color: #FFFFFF;    }
-    49%{    color: #FFFFFF; }
+  /*  49%{    color: #FFFFFF; }*/
     60%{    color: transparent; }
-    99%{    color:transparent;  }
+   /* 99%{    color:transparent;  }*/
     100%{   color: #FFFFFF;    }
 }
